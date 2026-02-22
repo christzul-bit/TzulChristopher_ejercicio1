@@ -17,11 +17,11 @@ Console.WriteLine("Ingrese el nivel de dolor en el rango 1-10_");
 int dolor = int.Parse(Console.ReadLine());
 Console.WriteLine("Ingrese la tensión sistólica_");
 double tension = double.Parse(Console.ReadLine());
-if (edad <= 0 && temperatura > -100 && temperatura < 100 && oxigeno > 0 && dolor >= 1 && dolor <= 100 && tension > 0) { 
+if (edad >= 0 && edad <= 100 && temperatura > -100 && temperatura < 100 && oxigeno > 0 && dolor >= 1 && dolor <= 10 && tension > 0) { 
     switch(opcion)
     {
         case 1:
-            //se sumara en 3 la prioridad por cada caso que se presente, al ser una emergencia la prioridad empieza con 1
+            //se sumara en 1 la prioridad por cada caso que se presente, al ser una emergencia la prioridad empieza con 3
             prioridad += 3;
             if(oxigeno < 90){prioridad += 1;}
             if(edad > 60) { prioridad += 1;}
@@ -49,6 +49,7 @@ if (edad <= 0 && temperatura > -100 && temperatura < 100 && oxigeno > 0 && dolor
             else
             {
                 Console.WriteLine("El pasiente no es un niño");
+                prioridad -= 1;
             }
             break;
         case 4:
@@ -59,8 +60,12 @@ if (edad <= 0 && temperatura > -100 && temperatura < 100 && oxigeno > 0 && dolor
             if (tension >= 140) { prioridad += 1; }
             if (dolor >= 5) { prioridad += 1; }
             break;
+        default: { Console.WriteLine("Opcion invalida"); break;}
     }
-    if(prioridad < 4)
+    if(prioridad < 0)
+    {
+        sugerencia = "No se tiene sugerencia";
+    }else if(prioridad < 4)
     {
         sugerencia = "Consulta normal";
     }else if(prioridad < 6)
@@ -68,7 +73,7 @@ if (edad <= 0 && temperatura > -100 && temperatura < 100 && oxigeno > 0 && dolor
         sugerencia = "Ateción necesaria";
     }else { sugerencia = "Emergencia total"; }
     Console.WriteLine($"El nivel de prioridad es {prioridad} \n" +
-        $"se recomienda {sugerencia}");
+        $"se recomienda: {sugerencia}");
 }else
 {
     Console.WriteLine("Una o varios valores son invalidos, verifique bien sus respuestas");
